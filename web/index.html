@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>audio-sync · 多设备音频时间索引</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+  <h1>audio-sync</h1>
+  <div id="hdr-status" class="hdr"></div>
+</header>
+
+<section class="panel">
+  <h2>设备 <button id="btn-create">+ 新设备</button></h2>
+  <div id="devices"></div>
+</section>
+
+<section class="panel">
+  <h2>覆盖时间线（服务器时间轴）</h2>
+  <div class="legend">
+    <span class="sw covered"></span>已覆盖
+    <span class="sw gap"></span>缺段
+    <span class="sw uncertain"></span>无法确认/降级
+    <span class="sw conflict"></span>冲突
+  </div>
+  <canvas id="timeline" width="1100" height="180"></canvas>
+</section>
+
+<section class="panel cols">
+  <div>
+    <h2>缺段</h2>
+    <table id="gaps"><thead><tr><th>设备</th><th>run</th><th>区间(s)</th><th>时长</th></tr></thead><tbody></tbody></table>
+  </div>
+  <div>
+    <h2>无法确认的区间</h2>
+    <table id="unconfirm"><thead><tr><th>设备</th><th>原因</th><th>说明</th></tr></thead><tbody></tbody></table>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>对齐报告（设备样本计数 ↔ 接收时间）</h2>
+  <div id="align"></div>
+</section>
+
+<section class="panel">
+  <h2>索引版本与来源 <button id="btn-rebuild">手动重建</button></h2>
+  <div id="index-meta"></div>
+  <table id="provenance"><thead><tr>
+    <th>segment</th><th>设备</th><th>counter区间</th><th>映射时间(s)</th><th>误差±</th><th>锚点</th>
+  </tr></thead><tbody></tbody></table>
+</section>
+
+<section class="panel">
+  <h2>片段（校验状态）</h2>
+  <table id="segments"><thead><tr>
+    <th>id</th><th>设备</th><th>run</th><th>counter</th><th>采样率</th><th>补传</th>
+    <th>状态</th><th>原因</th><th>操作</th>
+  </tr></thead><tbody></tbody></table>
+</section>
+
+<script src="/app.js"></script>
+</body>
+</html>
